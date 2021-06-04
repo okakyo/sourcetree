@@ -3,14 +3,14 @@ package main
 import (
 	"net/http"
 	"github.com/labstack/echo"
-	"./controllers"
+	"okakyo/practice-go/controllers"
 )
 
 func main(){
 	e:= echo.New()
-	e.Use()
+	controllers.TodoRouting(e)
 	e.GET("/",func (c echo.Context) error {
 		return c.String(http.StatusOK,"Hello June")
 	})
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(":8000"))
 }
