@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"github.com/labstack/echo"
 	"okakyo/practice-go/web"
+	"okakyo/practice-go/database"
 )
 
 func main(){
@@ -12,5 +13,6 @@ func main(){
 	e.GET("/",func (c echo.Context) error {
 		return c.String(http.StatusOK,"Hello July")
 	})
+	e.PUT("/database/reset/all",database.ResetDB)
 	e.Logger.Fatal(e.Start(":8000"))
 }

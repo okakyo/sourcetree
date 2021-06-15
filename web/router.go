@@ -1,14 +1,13 @@
 package web
 
 import (
-	"okakyo/practice-go/config/db"
+	"okakyo/practice-go/database"
 	"okakyo/practice-go/web/handler"
-
 	"github.com/labstack/echo"
 )
 
 func TodoRouting(e *echo.Echo) {
-	db,err:= db.NewSqlHandler()
+	db,err:= database.NewSqlHandler()
 	if err!= nil {
 		panic(err)
 	}
