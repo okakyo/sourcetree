@@ -5,6 +5,7 @@ import (
 	"okakyo/practice-go/domain/entity"
 	"okakyo/practice-go/usecase"
 	"okakyo/practice-go/web/dto/requests"
+
 	"github.com/labstack/echo"
 	"gorm.io/gorm"
 )
@@ -31,9 +32,9 @@ func (h *TodoHandlers) GetTodo(c echo.Context) error {
 	if err:= c.Bind(&args);err!=nil {
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
-	todo, err := h.todoUC.ReadTodo(args.Id);
+	todo, err := h.todoUC.ReadTodo(args.Id)
 	if err!= nil {
-		return echo.NewHTTPError(http.StatusBadRequest)
+		return echo.NewHTTPError(http.StatusNotFound)
 	}
 	return c.JSON(http.StatusOK,todo)
 
