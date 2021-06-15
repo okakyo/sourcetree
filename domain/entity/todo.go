@@ -4,9 +4,9 @@ import "gorm.io/gorm"
 
 type Todo struct {
 	gorm.Model
-	userId int
-	title  string
-	status int 
+	UserId int
+	Title  string
+	Status int 
 }
 
 type Todos []Todo

@@ -1,17 +1,23 @@
-package controllers
+package web
 
 import (
-	"github.com/labstack/echo"
-	"okakyo/practice-go/usecase"
+	"okakyo/practice-go/config/db"
 	"okakyo/practice-go/web/handler"
+
+	"github.com/labstack/echo"
 )
 
 func TodoRouting(e *echo.Echo) {
+	db,err:= db.NewSqlHandler()
+	if err!= nil {
+		panic(err)
+	}
 	router := e.Group("/todos")
-	
-	router.GET("/:id",usecase.FindOne)
-	router.POST("",usecase.CreateTodo)
-	router.PUT("/:id",usecase.UpdateTodo)
-	router.DELETE("/:id",usecase.DeleteTodo)
+	todoHandler :=handler.NewTodoHandler(db)
+	router.GET("",todoHandler.GetTodos)
+	router.GET("/:id",todoHandler.GetTodo)
+	router.POST("",todoHandler.PostTodo)
+	router.PUT("/:id",todoHandler.PutTodo)
+	router.DELETE("/:id",todoHandler.DeleteTodo)
 }
 
